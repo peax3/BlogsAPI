@@ -13,6 +13,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BlogsAPI.Contracts;
 using BlogsAPI.DBContext;
+using BlogsAPI.Models;
 using BlogsAPI.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -35,8 +36,21 @@ namespace BlogsAPI
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
+            services.AddIdentityCore<User>(options =>
+            {
+              
+                options.User.RequireUniqueEmail = true;
+                options.Password.RequiredLength = 8;
+                options.Password.RequireDigit = true;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = false;
+                //options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-. ";
+            }).AddEntityFrameworkStores<AppDbContext>();
+
             services.AddScoped<IBlogRepository, BlogRepository>();
             services.AddScoped<IPostRepository, PostRepository>();
+            services.AddScoped<IAccountRepository, AccountRepository>();
             
             services.AddControllers();
             

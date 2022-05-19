@@ -15,6 +15,8 @@ namespace BlogsAPI.Controllers
                     return Ok(response.Data);
                 case 404:
                     return NotFound();
+                case 400:
+                    return BadRequest(response.Data);
                 default:
                     throw new ArgumentOutOfRangeException();
             }

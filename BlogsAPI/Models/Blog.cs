@@ -17,6 +17,8 @@ namespace BlogsAPI.Models
         public DateTime CreatedAt { get; set; }
         public DateTime? LastUpdatedAt { get; set; }
         
+        public User User { get; set; }
+        
         // relationship
         public ICollection<Post> BlogPosts { get; set; }
         
