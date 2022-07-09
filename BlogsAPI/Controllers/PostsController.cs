@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using BlogsAPI.Contracts;
 using BlogsAPI.DBContext;
 using BlogsAPI.Dtos;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +20,7 @@ namespace BlogsAPI.Controllers
         }
         
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> CreatePost([FromBody]PostCreationDto postCreationDto)
         {
             try
